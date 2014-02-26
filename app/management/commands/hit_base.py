@@ -20,13 +20,18 @@ def do_timeit(loop_number):
 
     # chama o médodo objects_all, a quandidade de vezes recebido no parâmetro
     d = timeit.timeit('objects_all()', setup='from ' + __name__ + ' import objects_all', number=loop_number)
-    print('%s - Tempo Médio para cada ciclo da requisição até a resposta do site. Comparado entre %d entrada(s)]' %("%.5fs"%(avg_db), count))
-    print('%s - [Tempo Médio para %d query(ies) (SELECT * FROM table) efetuadas na Base de Dados]' %("%.5fs"%(d / loop_number), loop_number) )
-    print('%s - Database' %(avg_db))
-    print('%s - Serializacao' %(avg_serializer))
-    print('%s - Request Response' %(avg_request_response))
-    print('%s - Api View' %(avg_api_view))
-    print('%s - Render' %(avg_render_time))
+
+    print(' ')
+    print('Tempo Médio para cada ciclo desde a requisição até a resposta do site.')
+    print('Comparado entre %d entrada(s):' %(count))
+    print('%f - Database' %(avg_db))
+    print('%f - Serializacao' %(avg_serializer))
+    print('%f - Request Response' %(avg_request_response))
+    print('%f - Api View' %(avg_api_view))
+    print('%f - Render' %(avg_render_time))
+    print(' ')
+    print('%s - [Média do tempo para %d query(ies) (SELECT * FROM table) efetuadas na Base de Dados]' %("%.5fs"%(d / loop_number), loop_number) )
+    print(' ')
 
 def objects_all():
     '''
@@ -80,8 +85,6 @@ loop_number = 1
 for args in sys.argv:
     if args.startswith('loop'):
         arg = args.split('loop')
-        print(args)
-        print(arg)
         loop_number = arg[1]
 
 

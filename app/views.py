@@ -58,8 +58,9 @@ class UserListView(MyApiViewTimer):
     View princial. Alguns testes são feitos: de banco de dados e de serialização
     (model nativo para dicionario representativo, também nativo)
     '''
-    renderer_classes = ((MyRendererTimer, JSONPRenderer))
+    renderer_classes = [MyRendererTimer]
     def get(self, request, format=None):
+        print("inicio get")
         global serializer_time
         global db_time
 
@@ -79,6 +80,7 @@ class UserListView(MyApiViewTimer):
         #################
 
         return Response(data)
+    print("inicio get")
 
 
     @receiver(request_started)
@@ -110,7 +112,7 @@ class UserListView(MyApiViewTimer):
             api_view_time=api_view_time,
             render_time=render_time,
             date_time_profiling=datetime.datetime.now(),
-        )
+            )
 
         prof.save()
 
